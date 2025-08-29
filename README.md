@@ -2,6 +2,68 @@
 
 Esta API permite o registro, login, consulta de usuários e transferências de valores entre usuários. O objetivo é servir de base para estudos de testes e automação de APIs.
 
+
+# API GraphQL
+
+Além da API REST, este projeto expõe os mesmos serviços via GraphQL usando ApolloServer.
+
+## Como rodar a API GraphQL
+
+1. Instale as dependências necessárias:
+   ```sh
+   npm install apollo-server-express@3 express graphql jsonwebtoken dotenv
+   ```
+2. Copie o arquivo `.env.example` de `graphql/` para `.env` e ajuste as variáveis se necessário.
+3. Execute a API do GraphQL:
+   ```sh
+   node graphql/server.js
+   ```   
+   ```sh
+   npm run start-graphql
+   ```
+
+4. Acesse o playground GraphQL em: [http://localhost:4000/graphql](http://localhost:4000/graphql)
+
+## Estrutura dos principais arquivos GraphQL
+- `graphql/app.js`: configuração do ApolloServer e Express (sem listen)
+- `graphql/server.js`: inicializa o servidor (listen)
+- `graphql/schema.js`: definição dos Types, Queries e Mutations
+- `graphql/resolvers.js`: implementação dos resolvers
+- `graphql/middlewares/auth.js`: middleware para autenticação JWT
+
+## Autenticação
+- Para Mutations de Transferências, envie o header:
+  ```
+  Authorization: Bearer <token>
+  ```
+- O token é obtido via mutation `login`.
+
+## Exemplo de Query e Mutation
+```graphql
+# Listar usuários
+query {
+  users {
+    username
+    favorecidos
+    saldo
+  }
+}
+
+# Criar transferência (autenticado)
+mutation {
+  createTransfer(from: "julio", to: "priscila", value: 100) {
+    from
+    to
+    value
+    date
+  }
+}
+```
+
+## Observação
+- O app.js e server.js da API GraphQL ficam em `graphql/` para facilitar testes com Supertest.
+- A API REST permanece funcional, mas agora há suporte a GraphQL.
+
 ## Tecnologias
 - Node.js
 - Express
