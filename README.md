@@ -43,27 +43,28 @@ Além da API REST, este projeto expõe os mesmos serviços via GraphQL usando Ap
 
 ## Testes Automatizados GraphQL
 
+
 Os testes automatizados para a mutation de transferências GraphQL estão em:
 
-- `test/graphql/external/transferExternal.test.js`
+- `test/graphql/external/mutationTransfer.External.test.js`
 
 ### Casos de Teste
-1. Transferência com sucesso
-2. Sem saldo disponível para transferir
-3. Token de autenticação não informado
+1. Transferência realizada com sucesso
+2. Falha ao transferir sem saldo disponível
+3. Falha ao transferir para usuário remetente ou destinatário não encontrado
+4. Falha ao transferir sem informar o token de autenticação
+5. Falha ao passar credenciais inválidas
 
 #### Como executar os testes
 
 ```sh
 npm test
 # ou
-npx mocha test/graphql/external/transferExternal.test.js
+npx mocha test/graphql/external/mutationTransfer.External.test.js
 ```
 
-As respostas dos testes são salvas em `test/graphql/fixture/respostas/`.
-
 #### Pipeline CI
-O pipeline de integração contínua executa os testes automaticamente a cada push/pull request (ver `.github/workflows/ci-graphql.yml`).
+O pipeline de integração contínua executa os testes automaticamente a cada push/pull request (ver `.github/workflows/nodejs.yml`).
 
 #### Testes adicionais sugeridos
 - Transferência para usuário inexistente

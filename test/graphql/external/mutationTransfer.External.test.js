@@ -24,13 +24,12 @@ describe('GraphQL: Transferências de valores', function () {
       const res = await request(baseUrl)
         .post('')
         .send({
-            query:
-                    `mutation Mutation($username: String!, $password: String!) {
-                        login(username: $username, password: $password) {
-                            token
-                        }
-                    }
-                `,
+            query:  `mutation 
+              Mutation($username: String!, $password: String!) {
+                login(username: $username, password: $password) {
+                  token
+                }
+              }`,
             variables: dados.user
           });
           return res.body.data.login.token;
@@ -39,7 +38,7 @@ describe('GraphQL: Transferências de valores', function () {
       //console.log('Token:', token);
   });
 
-  it('Deve realizar uma transferência com sucesso', async function () {
+  it('Deve realizar uma transferência com sucesso 💸', async function () {
     const mutation = `mutation 
       CreateTransfer($from: String!, $to: String!, $value: Int!) {
         createTransfer(from: $from, to: $to, value: $value) {
@@ -65,7 +64,7 @@ describe('GraphQL: Transferências de valores', function () {
     
   });
 
-  it('Deve falhar ao transferir sem saldo disponível', async function () {
+  it('Deve falhar ao transferir sem saldo disponível 💰', async function () {
     const mutation = `mutation 
       CreateTransfer($from: String!, $to: String!, $value: Int!) {
         createTransfer(from: $from, to: $to, value: $value) {
@@ -89,7 +88,30 @@ describe('GraphQL: Transferências de valores', function () {
   expect(res.body.errors[0].message).to.equal('Saldo insuficiente');
   });
 
-  it('Deve falhar ao transferir sem informar o token de autenticação', async function () {
+  it('Deve falhar ao transferir para usuário remetente ou destinatário não encontrado 💆‍♂️', async function () {
+    const mutation = `mutation 
+      CreateTransfer($from: String!, $to: String!, $value: Int!) {
+        createTransfer(from: $from, to: $to, value: $value) {
+          from
+          to
+          value
+          date
+        }
+      }`;
+      const res = await request(baseUrl)
+        .post('')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ 
+          query: mutation,
+          variables: dados.transferenciaUsuarioInexistente 
+        });
+      //console.log(res.body);
+      expect(res.status).to.equal(200);
+      expect(res.body.errors[0].message).to.equal('Usuário remetente ou destinatário não encontrado');
+  });
+
+
+  it('Deve falhar ao transferir sem informar o token de autenticação 🔑', async function () {
     const mutation = `mutation 
       CreateTransfer($from: String!, $to: String!, $value: Int!) {
         createTransfer(from: $from, to: $to, value: $value) {
@@ -108,5 +130,23 @@ describe('GraphQL: Transferências de valores', function () {
     // console.log(res.body);
     expect(res.status).to.equal(200);
     expect(res.body.errors[0].message).to.equal('Não autenticado');
+  });
+
+  it("Deve falhar ao passar credenciais inválidas ❌", async function () {
+      const mutation = `mutation 
+        Mutation($username: String!, $password: String!) {
+                login(username: $username, password: $password) {
+                  token
+                }
+              }`;
+      const res = await request(baseUrl)
+        .post('')
+        .send({ 
+          query: mutation, 
+          variables: dados.credenciaisInvalidas
+          });
+      // console.log(res.body);
+      expect(res.status).to.equal(200);
+      expect(res.body.errors[0].message).to.equal('Credenciais inválidas');
   });
 });

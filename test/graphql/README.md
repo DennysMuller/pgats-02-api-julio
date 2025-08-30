@@ -5,7 +5,7 @@ Este projeto contém testes automatizados para a mutation de transferências da 
 ## Estrutura dos Testes
 
 - `test/graphql/external/transferExternal.test.js`: Testes automatizados para a mutation de transferências.
-- `test/graphql/fixture/respostas/`: Respostas (fixtures) dos testes automatizados.
+- `test/graphql/fixture/respostas/`: dados prontos e organizados usados para tornar os testes mais eficientes e consistentes.
 
 ## Casos de Teste
 
@@ -34,7 +34,7 @@ npx mocha test/graphql/external/transferExternal.test.js
 ## Observações
 
 - Os testes dependem de autenticação JWT. Ajuste a função `getValidToken()` conforme a sua implementação de login.
-- As respostas dos testes são salvas em `test/graphql/fixture/respostas/` para consulta.
+- O arquivo que contém os dados para uso dos testes está em: `test/graphql/fixture/respostas/` para consulta e ajuste quando necessário.
 
 ## Pipeline CI (GitHub Actions)
 
