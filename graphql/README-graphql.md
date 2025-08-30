@@ -52,3 +52,24 @@ mutation {
 ## Observação
 - O app.js e server.js da API GraphQL ficam em `graphql/` para facilitar testes com Supertest.
 - A API REST permanece funcional, mas agora há suporte a GraphQL.
+
+## Testes Automatizados
+
+Os testes automatizados para a mutation de transferências GraphQL estão em:
+
+- `test/graphql/external/mutationTransfer.External.test.js`
+
+### Casos de Teste
+1. Transferência realizada com sucesso
+2. Falha ao transferir sem saldo disponível
+3. Falha ao transferir para usuário remetente ou destinatário não encontrado
+4. Falha ao transferir sem informar o token de autenticação
+5. Falha ao passar credenciais inválidas
+
+#### Como executar os testes
+
+```sh
+npm test
+# ou
+npx mocha test/graphql/external/mutationTransfer.External.test.js
+```

@@ -13,5 +13,14 @@
       "from": "julio",
       "to": "priscila",
       "value": 9999999
+    },
+    "credenciaisInvalidas": {
+        "username": "julio",
+        "password":"123a567"
+    },
+    "transferenciaUsuarioInexistente": {
+        "from":"julio",
+        "to": "carla",
+        "value": 100
     }
 }
