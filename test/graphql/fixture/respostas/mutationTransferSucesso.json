@@ -1,0 +1,17 @@
+{
+    "user": {
+        "username": "julio",
+        "password": "123456"
+    },
+
+    "transfer": {
+        "from": "julio",
+        "to": "priscila",
+        "value": 123
+    },
+    "saldoInsuficiente": {
+      "from": "julio",
+      "to": "priscila",
+      "value": 9999999
+    }
+}

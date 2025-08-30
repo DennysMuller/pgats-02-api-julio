@@ -31,12 +31,46 @@ Além da API REST, este projeto expõe os mesmos serviços via GraphQL usando Ap
 - `graphql/resolvers.js`: implementação dos resolvers
 - `graphql/middlewares/auth.js`: middleware para autenticação JWT
 
+
 ## Autenticação
 - Para Mutations de Transferências, envie o header:
   ```
   Authorization: Bearer <token>
   ```
 - O token é obtido via mutation `login`.
+
+---
+
+## Testes Automatizados GraphQL
+
+Os testes automatizados para a mutation de transferências GraphQL estão em:
+
+- `test/graphql/external/transferExternal.test.js`
+
+### Casos de Teste
+1. Transferência com sucesso
+2. Sem saldo disponível para transferir
+3. Token de autenticação não informado
+
+#### Como executar os testes
+
+```sh
+npm test
+# ou
+npx mocha test/graphql/external/transferExternal.test.js
+```
+
+As respostas dos testes são salvas em `test/graphql/fixture/respostas/`.
+
+#### Pipeline CI
+O pipeline de integração contínua executa os testes automaticamente a cada push/pull request (ver `.github/workflows/ci-graphql.yml`).
+
+#### Testes adicionais sugeridos
+- Transferência para usuário inexistente
+- Valor de transferência inválido
+- Token inválido ou expirado
+
+---
 
 ## Exemplo de Query e Mutation
 ```graphql
