@@ -8,8 +8,7 @@
   "test-external": "mocha \"test/external/**/*.test.js\" --timeout 10000 --reporter mochawesome --reporter-options quiet=true",
   "test-controller": "mocha \"test/controller/**/*.test.js\" --timeout 10000 --reporter mochawesome --reporter-options quiet=true",
   "test-external-graphql": "mocha \"test/graphql/external/**/*.test.js\" --timeout 10000 --reporter mochawesome --reporter-options quiet=true",
-  "start": "concurrently \"npm run start-rest\" \"npm run start-graphql\"",
-  "star-rest": "node server.js",
+  "start-rest": "node server.js",
   "start-graphql": "node graphql/server.js"
   },
   "keywords": [],
