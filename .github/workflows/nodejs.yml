@@ -33,7 +33,7 @@ jobs:
       run: npm install -g wait-on
 
     - name: ⏳ Esperar a API estar funcionando
-      run: wait-on http://localhost:3000/api/usuarios
+      run: wait-on http://localhost:4000/graphql
 
     - name: 🧪 Executar testes de API Rest via HTTP
       run: npm run test-external
