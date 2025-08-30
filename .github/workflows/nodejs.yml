@@ -25,7 +25,7 @@ jobs:
     - name: 🧪 Executar testes de API via controller
       run: npm run test-controller
 
-    - name: ▶️ Subir as API, Rest e GraphQL
+    - name: ▶️ Subir as API Rest
       run: npm start &
 
     - name: ⏳ Esperar a API estar funcionando
