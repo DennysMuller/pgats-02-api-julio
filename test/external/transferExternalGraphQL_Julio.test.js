@@ -18,7 +18,28 @@ describe.only("Testes de Transferência", () => {
           password: '123456'
         }
       });
-    console.log(resposta.body.data.login.token);
-    expect(resposta.status).to.equal(200);
+    // console.log(resposta.body.data.login.token);
+    
+    const respostaTransferencia = await request('http://localhost:4000/graphql')
+      .post('')
+      .set('Authorization', `Bearer ${resposta.body.data.login.token}`)
+      .send({
+        query: `
+          mutation CreateTransfer($from: String!, $to: String!, $value: Int!) {
+            createTransfer(from: $from, to: $to, value: $value) {
+              date
+              from
+              to
+              value
+            }
+          }`,
+        variables: {
+          from: 'julio',
+          to: 'priscila',
+          value: 15
+        }
+      });
+    // console.log(respostaTransferencia.body);
+    expect(respostaTransferencia.status).to.equal(200);
   });
 });
