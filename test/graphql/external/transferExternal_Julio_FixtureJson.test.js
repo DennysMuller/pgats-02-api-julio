@@ -1,6 +1,7 @@
 const request  = require("supertest");
 const { expect, use } = require("chai");
 const chaiExclude = require('chai-exclude');
+require('dotenv').config();
 use(chaiExclude);
 
 
@@ -22,7 +23,7 @@ describe("Testes de Transferência, criado pelo Júlio de Lima, melhoria do tran
    */
   before(async () => {
       const loginUser = require('../fixture/requisicoes/login/loginUser.json')
-      const resposta = await request('http://localhost:4000/graphql')
+      const resposta = await request(process.env.BASE_URL_GRAPHQL)
         .post('')
         .send(loginUser);
       tokens = resposta.body.data.login.token;
@@ -46,7 +47,7 @@ describe("Testes de Transferência, criado pelo Júlio de Lima, melhoria do tran
     it('Validar que é possível transferir grana entre duas contas', async () => {
       const createTransfer = require('../fixture/requisicoes/transferencia/createTransfer.json')
       const respostaEsperada = require('../fixture/respostas/transferencia/validarQueEPossivelTransferirGranaEntreDuasContas.json')
-      const respostaTrasnsferencia = await request('http://localhost:4000/graphql')
+      const respostaTrasnsferencia = await request(process.env.BASE_URL_GRAPHQL)
         .post('')
         .set('Authorization', `Bearer ${tokens}`)
         .send(createTransfer);
@@ -80,7 +81,7 @@ describe("Testes de Transferência, criado pelo Júlio de Lima, melhoria do tran
       const createTransfer = require('../fixture/requisicoes/transferencia/createTransfer.json')
       // 0:6:10 o arquivo: createTransfer.json tem value = 15, para transferir um valor alto iremos manipular
       createTransfer.variables.value = 10001;
-      const respostaTrasnsferencia = await request('http://localhost:4000/graphql')
+      const respostaTrasnsferencia = await request(process.env.BASE_URL_GRAPHQL)
         .post('')
         .set('Authorization', `Bearer ${tokens}`)
         .send(createTransfer);

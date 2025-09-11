@@ -1,4 +1,13 @@
 # Ajustado a partir de 01:32:30
+# A partir de 01:55:18 começou a falar do "dotenv" .env. E 01:56:04 baixar a biblioteca.
+# npm i dotenv -D
+# A partir de 02:54:15 vimos que o uso do .env e a inclusão dele no .gitignore quebrou a pipeline
+# A partir de 03:01:25 vamos melhorar o "Criar .env", utilizar as variáveis dinâmicas do Github Actions.
+# Ocultar alterações da branch atual, git stash. Volta para a branch desejada (exemplo: main).
+# Após o comando: Saved working directory and index state WIP on branch-que-estava: cod_branch texto do commit da branch-que-estava
+# Retornar os arquivos ocultados: git stash apply e git branch
+#
+
 
 name: Node.js CI
 
@@ -37,7 +46,17 @@ jobs:
       run: npm run start-graphql &
 
     - name: ⏳ Esperar as APIs estarem funcionando
-      run: sleep 5  # segundos
+      run: sleep 8  # segundos
+
+    #- name: Criar .env
+    #  run: |
+    #    echo "BASE_URL_REST = http://localhost:3000" >> .env
+    #    echo "BASE_URL_GRAPHQL = http://localhost:4000/graphql" >> .env
+
+    - name: Criar .env
+      run: |
+        echo "BASE_URL_REST = ${{ secrets.BASE_URL_REST }}" >> .env
+        echo "BASE_URL_GRAPHQL = ${{ secrets.BASE_URL_GRAPHQL }}" >> .env
 
     - name: 🧪 Executar testes External de API Rest via HTTP
       run: npm run test-rest-external
