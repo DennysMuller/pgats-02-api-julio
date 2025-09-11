@@ -31,7 +31,7 @@ jobs:
     #  run: npm run test-graphql-external
 
     - name: ▶️ Subir as API Rest
-      run: npm start-rest &
+      run: npm run start-rest &
 
     - name: ▶️ Subir a API GraphQL
       run: npm run start-graphql &
