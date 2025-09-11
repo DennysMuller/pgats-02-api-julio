@@ -119,6 +119,14 @@ mutation {
   npm install express swagger-ui-express bcryptjs
   ```
 
+### Configuração
+
+Antes de seguir, crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+```
+BASE_URL_REST = "http://localhost:3000"
+BASE_URL_GRAPHQL = "http://localhost:4000/graphql"
+```
+
 ### Relatórios de Testes com Mochawesome
 
 Para gerar relatórios de testes em formato HTML e JSON, instale o pacote [mochawesome](https://github.com/adamgruber/mochawesome) como dependência de desenvolvimento:

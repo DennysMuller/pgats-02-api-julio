@@ -1,11 +1,12 @@
 const request  = require("supertest");
 const { expect } = require("chai");
+require('dotenv').config();
 
 // Aula 7 sexta-feira
 
 describe("Testes de Transferência, criado pelo Júlio de Lima", () => {
   it('Validar que é possível transferir grana entre duas contas', async () => {
-    const resposta = await request('http://localhost:4000/graphql')
+    const resposta = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
       .send({
         query: `
@@ -21,7 +22,7 @@ describe("Testes de Transferência, criado pelo Júlio de Lima", () => {
       });
     // console.log(resposta.body.data.login.token);
     
-    const respostaTransferencia = await request('http://localhost:4000/graphql')
+    const respostaTransferencia = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
       .set('Authorization', `Bearer ${resposta.body.data.login.token}`)
       .send({
@@ -57,7 +58,7 @@ describe("Testes de Transferência, criado pelo Júlio de Lima", () => {
   // Para não alterar esse arquivo continuaremos no arquivo: transferExternal_Julio_FixtureJson.test.js
 
   beforeEach(async () => { 
-    const resposta = await request('http://localhost:4000/graphql')
+    const resposta = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
       .send({
         query: `
@@ -77,7 +78,7 @@ describe("Testes de Transferência, criado pelo Júlio de Lima", () => {
 
   it('Validar que não é possível transferir de uma conta que não possui saldo suficiente', async () => {
 
-    const respostaTrasnsferencia = await request('http://localhost:4000/graphql')
+    const respostaTrasnsferencia = await request(process.env.BASE_URL_GRAPHQL)
       .post('')
       .set('Authorization', `Bearer ${tokens}`)
       .send({
