@@ -1,0 +1,29 @@
+[
+      {
+        "nomeDoTeste": "Saldo insuficiente",
+        "createTransfer": {
+          "from": "julio",
+          "to": "priscila",
+          "value": 10001
+        },
+        "mensagemEsperada": "Saldo insuficiente"
+      },
+      {
+        "nomeDoTeste": "Remetente não encontrado",
+        "createTransfer": {
+          "from": "pedro",
+          "to": "priscila",
+          "value": 15
+        },
+       "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
+      },
+      {
+        "nomeDoTeste": "Destinatário não encontrado",
+        "createTransfer": {
+          "from": "julio",
+          "to": "karla",
+          "value": 15
+        },
+        "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
+      }
+    ]
