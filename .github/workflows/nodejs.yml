@@ -53,6 +53,7 @@ jobs:
     #    echo "BASE_URL_REST = http://localhost:3000" >> .env
     #    echo "BASE_URL_GRAPHQL = http://localhost:4000/graphql" >> .env
 
+    # A partir de 03:00:00 como configurar no Github Actions as varáveis abaixo
     - name: Criar .env
       run: |
         echo "BASE_URL_REST = ${{ secrets.BASE_URL_REST }}" >> .env
